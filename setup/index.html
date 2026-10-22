@@ -1,60 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PC Setup</title>
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#0d1117">
-  <meta name="darkreader-lock">
-  <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-dark.min.css" />
+
   <style>
-    body {
-      background-color: #0d1117;
-      padding: 30px 15px; /* Better horizontal padding for mobile */
-      margin: 0;
-      box-sizing: border-box;
-    }
-    zero-md {
-      display: block;
+    html, body { background: #0d1117; }
+    body { margin: 0; padding: 30px 15px; }
+
+    .markdown-body {
       max-width: 850px;
-      margin: 0 auto; /* Centers the content without breaking viewport width */
-      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 0;
+      background: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     }
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      margin-right: 4px;
+      vertical-align: -3px;
+      flex-shrink: 0;
+    }
+    .icon svg { display: block; width: 17px; height: 17px; }
   </style>
 </head>
 <body>
-  <zero-md>
-    <template>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-dark.min.css">
-      <style>
-        .markdown-body {
-          background-color: transparent !important;
-        }
-      </style>
-    </template>
-    <script type="text/markdown">
-## PC Specs
-* <sub><img src="https://api.iconify.design/lucide:cpu.svg?color=%23e6edf3" width="16" height="16" alt="CPU" class="darkreader-ignore" /></sub> **CPU:** Intel Core i5-12400F
-* <sub><img src="https://api.iconify.design/lucide:gpu.svg?color=%23e6edf3" width="16" height="16" alt="GPU" class="darkreader-ignore" /></sub> **GPU:** ASRock AMD Radeon RX 6600 Challenger D 8GB
-* <sub><img src="https://api.iconify.design/lucide:circuit-board.svg?color=%23e6edf3" width="16" height="16" alt="Motherboard" class="darkreader-ignore" /></sub> **Motherboard:** MSI PRO H610M-E DDR4
-* <sub><img src="https://api.iconify.design/lucide:memory-stick.svg?color=%23e6edf3" width="16" height="16" alt="RAM" class="darkreader-ignore" /></sub> **RAM:** Kingston FURY Beast 32GB (2x16GB) DDR4 3200MHz CL16
-* <sub><img src="https://api.iconify.design/lucide:hard-drive.svg?color=%23e6edf3" width="16" height="16" alt="Storage" class="darkreader-ignore" /></sub> **Storage:** ADATA LEGEND 800 M.2 SSD 1TB
-* <sub><img src="https://api.iconify.design/lucide:snowflake.svg?color=%23e6edf3" width="16" height="16" alt="Cooler" class="darkreader-ignore" /></sub> **Cooler:** Endorfy Spartan 5 MAX ARGB
-* <sub><img src="https://api.iconify.design/lucide:zap.svg?color=%23e6edf3" width="16" height="16" alt="PSU" class="darkreader-ignore" /></sub> **PSU:** EVGA SuperNOVA 750 P2 (750W 80 PLUS Platinum)
-* <sub><img src="https://api.iconify.design/lucide:fan.svg?color=%23e6edf3" width="16" height="16" alt="Fans" class="darkreader-ignore" /></sub> **Fans:** 3x Arctic P12 PWM PST ARGB
-* <sub><img src="https://api.iconify.design/lucide:box.svg?color=%23e6edf3" width="16" height="16" alt="Case" class="darkreader-ignore" /></sub> **Case:** ADATA XPG STARKER AIR
+  <main class="markdown-body" id="app"></main>
 
----
+  <script>
+    const ICON_BASE = "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons";
+    const ICON_COLOR = "#e6edf3";
+    const ICON_SIZE = 17;
 
-## Peripherals
-* <sub><img src="https://api.iconify.design/lucide:monitor.svg?color=%23e6edf3" width="16" height="16" alt="Monitor" class="darkreader-ignore" /></sub> **Monitor:** 27" LG UltraGear 27GS75Q-B
-* <sub><img src="https://api.iconify.design/lucide:mouse.svg?color=%23e6edf3" width="16" height="16" alt="Mouse" class="darkreader-ignore" /></sub> **Mouse:** Glorious Model D Wireless
-* <sub><img src="https://api.iconify.design/lucide:keyboard.svg?color=%23e6edf3" width="16" height="16" alt="Keyboard" class="darkreader-ignore" /></sub> **Keyboard:** Genesis Thor 404 TKL
-* <sub><img src="https://api.iconify.design/lucide:keyboard.svg?color=%23e6edf3" width="16" height="16" alt="Keyboard" class="darkreader-ignore" /></sub> **Keyboard:** Royal Kludge R75
-* <sub><img src="https://api.iconify.design/lucide:headphones.svg?color=%23e6edf3" width="16" height="16" alt="Headset" class="darkreader-ignore" /></sub> **Headset:** SteelSeries Arctis 1 Wired
-* <sub><img src="https://api.iconify.design/lucide:mic.svg?color=%23e6edf3" width="16" height="16" alt="Microphone" class="darkreader-ignore" /></sub> **Microphone:** FIFINE A6NEO
-    </script>
-  </zero-md>
+    const sections = [
+      {
+        title: "PC Specs",
+        items: [
+          ["cpu", "CPU", "Intel Core i5-12400F"],
+          ["gpu", "GPU", "ASRock AMD Radeon RX 6600 Challenger D 8GB"],
+          ["circuit-board", "Motherboard", "MSI PRO H610M-E DDR4"],
+          ["memory-stick", "RAM", "Kingston FURY Beast 32GB (2x16GB) DDR4 3200MHz CL16"],
+          ["hard-drive", "Storage", "ADATA LEGEND 800 M.2 SSD 1TB"],
+          ["snowflake", "Cooler", "Endorfy Spartan 5 MAX ARGB"],
+          ["zap", "PSU", "EVGA SuperNOVA 750 P2 (750W 80 PLUS Platinum)"],
+          ["fan", "Fans", "3x Arctic P12 PWM PST ARGB"],
+          ["box", "Case", "ADATA XPG STARKER AIR"]
+        ]
+      },
+      {
+        title: "Peripherals",
+        items: [
+          ["monitor", "Monitor", '27" LG UltraGear 27GS75Q-B'],
+          ["mouse", "Mouse", "Glorious Model D Wireless"],
+          ["keyboard", "Keyboard", "Genesis Thor 404 TKL"],
+          ["keyboard", "Keyboard", "Royal Kludge R75"],
+          ["headphones", "Headset", "SteelSeries Arctis 1 Wired"],
+          ["mic", "Microphone", "FIFINE A6NEO"]
+        ]
+      }
+    ];
+
+    function createIcon(name) {
+      const span = document.createElement("span");
+      span.className = "icon";
+      span.setAttribute("aria-hidden", "true");
+
+      fetch(`${ICON_BASE}/${name}.svg`)
+        .then(r => r.text())
+        .then(svg => {
+          svg = svg
+            .replace(/stroke="currentColor"/g, `stroke="${ICON_COLOR}"`)
+            .replace(/width="24"\s+height="24"/, `width="${ICON_SIZE}" height="${ICON_SIZE}"`);
+          const wrapper = document.createElement("span");
+          wrapper.innerHTML = svg;
+          span.appendChild(wrapper.firstElementChild);
+        })
+        .catch(() => { /* fallback: leave empty */ });
+
+      return span;
+    }
+
+    function render() {
+      const frag = document.createDocumentFragment();
+
+      sections.forEach((section, i) => {
+        if (i > 0) frag.appendChild(document.createElement("hr"));
+
+        const h2 = document.createElement("h2");
+        h2.textContent = section.title;
+        frag.appendChild(h2);
+
+        const ul = document.createElement("ul");
+        section.items.forEach(([icon, label, value]) => {
+          const li = document.createElement("li");
+          li.appendChild(createIcon(icon));
+          const strong = document.createElement("strong");
+          strong.textContent = `${label}:`;
+          li.appendChild(strong);
+          li.appendChild(document.createTextNode(` ${value}`));
+          ul.appendChild(li);
+        });
+        frag.appendChild(ul);
+      });
+
+      document.getElementById("app").appendChild(frag);
+    }
+
+    render();
+  </script>
 </body>
 </html>
